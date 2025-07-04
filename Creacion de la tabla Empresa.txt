@@ -1,0 +1,42 @@
+use Empresa;
+
+create table Clientes(
+id_cliente int primary key identity(1,1),
+nombre varchar(50),
+correo varchar(100)
+);
+
+
+create table Pedidos(
+id_pedido int primary key identity(1,1),
+fecha datetime, 
+monto decimal(10,2),
+id_cliente int, 
+foreign key (id_cliente) references Clientes(id_cliente)
+);
+
+
+
+insert into Clientes(nombre, correo) 
+values 
+('Juan Pérez', 'juan@example.com'), 
+('Maria Gómez', 'mariag@example.com');
+
+insert into Clientes(nombre, correo) 
+values 
+('Este Wey', 'wey@example.com'), 
+('Maria Pérez', 'mariap@example.com');
+
+
+
+
+insert into Pedidos (fecha, monto, id_cliente) 
+values
+('2025-06-15', 5000.00, 4),
+('2025-06-20', 3000.00, 4);
+
+
+
+
+
+select p.id_pedido, p.fecha, p.monto, c.nombre from Pedidos p inner join Clientes c on p.id_cliente = c.id_cliente;
